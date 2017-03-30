@@ -20,6 +20,7 @@ class MemberSummary extends React.Component {
     // event.preventDefault();
     // this.setState({dummyData});
     Util.insertIntoDb(this.props.data);
+    // Util.sendServerTripName(this.props.data.tripName, this.props.data.tripDesc );
     this.props.calculateMemberSum();
   }
 

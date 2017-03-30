@@ -26,10 +26,10 @@ const CreateTrip = ({tripName, tripDesc, handleTripNameSubmit, onInputChange}) =
           to='/upload-receipt'
           value='submit'
           className='btn btn-primary btn-link'
-          onClick={handleTripNameSubmit}
           >New Trip
         </Link>
   </div>
 )
 
+          // onClick={handleTripNameSubmit}
 export default CreateTrip;
