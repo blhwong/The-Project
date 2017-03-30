@@ -82,6 +82,7 @@ class App extends React.Component {
 
   handleSetSummary(summary) {
     this.setState(summary);
+    this.handleSetSummary = this.handleSetSummary.bind(this);
   }
 
   handleRemoveFriend(email) {

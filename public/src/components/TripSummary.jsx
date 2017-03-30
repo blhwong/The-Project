@@ -19,17 +19,11 @@ class TripSummary extends React.Component {
     //   username: 'Brandon Wong',
     //   items: [[{amount: "42.00", members: ["Brandon Wong"], name: "Pasta"}]]
     // }
-
     return(
       <div className='page-container'>
         <h1>Most Recent Trips</h1>
-<<<<<<< HEAD
         <div className='trip-summary'>{this.props.data.recent.map((item,index) =>
           <TripSummaryEntry key={index} setSummary={this.props.setSummary} item={item}/>)}
-=======
-
-        <div className='trip-summary'>{this.props.data.recent.map((item,index) => <TripSummaryEntry setSummary={this.props.setSummary} item={item}/>)}
->>>>>>> Create component for TripSummary Entry
         </div>
       </div>
     )
