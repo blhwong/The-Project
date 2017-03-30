@@ -24,6 +24,7 @@ class MemberSummary extends React.Component {
   }
 
   render() {
+    console.log('MEMBER SUMMARY STATE', this.props);
     return (
       <div className='member-summary-page'>
         <Link to='/additems' className='back-history'>Receipt Items</Link>
