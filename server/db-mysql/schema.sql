@@ -101,6 +101,19 @@ REFERENCES receipts(id);
 ALTER TABLE consumed_items ADD FOREIGN KEY (tripID)
 REFERENCES trips(id);
 
+INSERT INTO members (name, email)
+VALUES ('Kai', 'kai@gmail.com');
+INSERT INTO members (name, email)
+VALUES ('Tayo', 'tayo@gmail.com');
+INSERT INTO members (name, email)
+VALUES ('Gary', 'garysux@gmail.com');
+INSERT INTO members (name, email)
+VALUES ('Whit', 'whit@gmail.com');
+INSERT INTO members (name, email)
+VALUES ('Duy', 'duy@gmail.com');
+INSERT INTO members (name, email)
+VALUES ('Eugene', 'eugene@gmail.com');
+
 /*  Execute this file from the command line by typing:
  *    mysql -u root < schema.sql
  *  to create the database and the tables.*/

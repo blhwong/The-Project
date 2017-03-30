@@ -87,7 +87,7 @@ class App extends React.Component {
       members: ['Brandon', 'Kai'],
       tripName: 'testing',
       username: 'Brandon Wong',
-      items: [[{amount: "88.00", members: ["Brandon Wong"], name: "Pasta"}]]
+      items: [[{"name":"2 Uni pasta","amount":"42.00","members":["Brandon Wong","Kai"]}],[{"name":"1 Truffle Fries","amount":"6.00","members":["Brandon Wong"]}],[{"name":"1 Chicken Wings","amount":"10.00","members":["Brandon Wong","Kai"]}],[{"name":"20 HH OYSTER","amount":"20.00","members":["Brandon Wong"]}],[{"name":"1 HH- Saporo","amount":"5.00","members":["Brandon Wong","Kai"]}],[{"name":"1 HH-Goose Island","amount":"5.00","members":["Brandon Wong"]}]]
     });
   }
 
