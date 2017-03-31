@@ -250,10 +250,17 @@ app.post('/summary', (req, res) => {
 
 // this will duplicate with Duy's /recent
 app.post('/recent', (req, res) => {
-  db.getReceiptsAndTrips({adminName: req.body.username, tripName: req.body.tripName})
-  .then( (results) => {
-    res.send(results);
+  db.getReceiptsAndTrips([req.body.email], (err, result) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.send(result);
+    }
   });
+  // db.getReceiptsAndTrips({adminName: req.body.username, tripName: req.body.tripName})
+  // .then( (results) => {
+  //   res.send(results);
+  // });
 });
 
 //gVision.spliceReceipt produces an object of item : price pairs

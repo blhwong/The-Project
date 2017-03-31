@@ -291,7 +291,7 @@ const createMemberSummary = (params) => {
 }
 
 
-const getReceiptsAndTrips = (params) => {
+const getReceiptsAndTrips = (params, cb) => {
   let database = mysqlConfig.database;
   if (database = 'gewd') {
     database = '';
@@ -299,8 +299,8 @@ const getReceiptsAndTrips = (params) => {
     database = 'heroku_a258462d4ded143' + '.';
   }
 
-  const queryStringGetAllTripsFromAdminName = `SELECT trips.name FROM ` + database + `trips WHERE trips.adminID = (SELECT members.id FROM ` + database + `members WHERE members.name = ?);`
-  const queryStringGetTripIDFromTripName = `SELECT trips.id from ` + database + `trips WHERE trips.name = ?;`
+  // const queryStringGetAllTripsFromAdminName = `SELECT trips.name FROM ` + database + `trips WHERE trips.adminID = (SELECT members.id FROM ` + database + `members WHERE members.name = ?);`
+  // const queryStringGetTripIDFromTripName = `SELECT trips.id from ` + database + `trips WHERE trips.name = ?;`
   // const queryStringGetMemberIDFromTripID = `SELECT trips_members.memberID from heroku_a258462d4ded143.trips_members WHERE trips_members.tripID = ?;`
   // const queryStringGetMemberNameFromMemberID = `SELECT members.name FROM heroku_a258462d4ded143.members WHERE members.id = ?;`
 
@@ -310,19 +310,38 @@ const getReceiptsAndTrips = (params) => {
   // const queryStringGetSumTaxFromReceiptName = `SELECT receipts.sum_tax FROM receipts WHERE receipts.name = ?;`
   // const queryStringGetSumTipFromReceiptName = `SELECT receipts.sum_tip FROM receipts WHERE receipts.name = ?;`
 
-  let adminName = params.adminName;
-  let tripName = params.tripName;
+  // const queryMembersFromTripsName = select * from trips_members, members where trips_members.tripID = (select id from trips where trips.name = '?') and memberID=members.id;
 
-  return db.queryAsync(queryStringGetAllTripsFromAdminName, adminName)
-    .then( tripsArray => tripsArray )
-    // .then( tripsArray => {
-    //   return Promise.map( tripsArray, trip => {
-    //     return db.queryAsync(queryStringGetTripIDFromTripName, trip.name)
-    //       .then( tripID => tripID )
-    //   })
-    // })
-    .catch( err => console.log('ERROR: getAllTripsFromAdminName', err ));
-}
+  // const queryStringGetAdminIdByEmail = 'select id from users where email = ?';
+  // let adminName = params.adminName;
+  // let tripName = params.tripName;
+  const queryStringGetReceiptInfoFromAdminName = 'select trips.name, receipts.sum_bill, receipts.sum_tax, receipts.sum_tip from trips, receipts where trips.adminID = (select members.id from members where members.email = ?) and trips.id = receipts.tripID';
+  const queryStringTest = 'select receipts.id, trips.id, trips.name, receipts.sum_bill, receipts.sum_tax, receipts.sum_tip, GROUP_CONCAT(distinct trips_members.memberID), items.receiptID, group_concat(items.name), group_concat(items.raw_price), group_concat(consumed_items.payeeID) from trips, receipts, trips_members, items, consumed_items where (select id from members where members.email=?) and (receipts.tripID = trips.id) and trips_members.tripID = trips.id and items.id=consumed_items.itemID and receipts.id=items.receiptID group by receipts.id, items.receiptID';
+  db.query(queryStringGetReceiptInfoFromAdminName, params, (err, result) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      console.log(result);
+      db.query(queryStringTest, params, (err, result) => {
+        console.log('TEST', result);
+      });
+      cb(null, result);
+
+    }
+  });
+
+
+
+  // return db.queryAsync(queryStringGetAllTripsFromAdminName, adminName)
+  //   .then( tripsArray => tripsArray )
+  //   // .then( tripsArray => {
+  //   //   return Promise.map( tripsArray, trip => {
+  //   //     return db.queryAsync(queryStringGetTripIDFromTripName, trip.name)
+  //   //       .then( tripID => tripID )
+  //   //   })
+  //   // })
+  //   .catch( err => console.log('ERROR: getAllTripsFromAdminName', err ));
+};
 
 module.exports = {
   createNewUser,
