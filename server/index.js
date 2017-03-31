@@ -268,7 +268,6 @@ app.post('/recent', (req, res) => {
       res.send(result);
     }
   });
-
 });
 
 //gVision.spliceReceipt produces an object of item : price pairs
