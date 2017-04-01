@@ -1,4 +1,4 @@
-
+//MEMBER SUMMARY (after going through creating trip process)
 
 import React from 'react';
 import Util from '../lib/util.js';
