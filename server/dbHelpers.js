@@ -367,7 +367,7 @@ const getReceiptsAndTrips = (params, cb) => {
               local[itemNames[item]] = {'found': true};
               local[itemNames[item]] = {
                 'package': {
-                  'name': itemMembers[item]
+                  'name': itemNames[item]
                 }
               };
               // local[itemNames[item]]['package']['amount'] = itemPrices[item];
@@ -384,7 +384,12 @@ const getReceiptsAndTrips = (params, cb) => {
               }
             }
           }
-          console.log(local);
+          console.log('LOCAL STORAGE', local);
+          for (var element in local) {
+            items.push([local[element]['package']]);
+          }
+          console.log('ITEMS', items);
+          packet['items'] = items;
           summaryPacket.push(packet);
           // summaryPacket[summary]['name'] = result[summary]['name'];
         }
