@@ -293,10 +293,8 @@ const createMemberSummary = (params) => {
 
 const getReceiptsAndTrips = (params, cb) => {
   let database = mysqlConfig.database;
-  //FOR LOCAL DB
   if (database = 'gewd') {
     database = '';
-    //FOR LIVE DATABASE
   } else if (database = 'heroku_a258462d4ded143') {
     database = 'heroku_a258462d4ded143' + '.';
   }
@@ -403,7 +401,7 @@ const getReceiptsAndTrips = (params, cb) => {
     }
   });
 
-  console.log('PARAMS:', params);
+  console.log(params);
   let adminName = params.adminName;
   let tripName = params.tripName;
 

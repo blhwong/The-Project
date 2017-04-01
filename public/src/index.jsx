@@ -453,11 +453,10 @@ class App extends React.Component {
               path ="/recent-trips"
               isAuthenticated={this.state.isAuthenticated}
               component={TripSummary}
+              data={this.state}
               recent={this.getRecentTrip}
               setSummary={this.handleSetSummary}
               tripName={this.state.tripName}
-              updateTripSummary={this.updateTripSummary}
-              data={this.state}
             />
             <PrivateRoute
               path ="/friends"
