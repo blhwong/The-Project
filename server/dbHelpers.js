@@ -372,7 +372,6 @@ const getReceiptsAndTrips = (params, cb) => {
               };
               // local[itemNames[item]]['package']['amount'] = itemPrices[item];
               local[itemNames[item]]['package']['amount'] = itemPrices[item];
-              console.log('MEMBER LIST ---------', local[itemNames[item]]['members']);
             }
             if (!local[itemNames[item]]['members']) {
               // local[itemNames[item]]['member'][itemMembers[item]] = true;

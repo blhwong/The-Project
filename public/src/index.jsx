@@ -80,9 +80,9 @@ class App extends React.Component {
     this.updateTripSummary = this.updateTripSummary.bind(this);
   }
 
+
   handleSetSummary(summary) {
     this.setState(summary);
-    this.handleSetSummary = this.handleSetSummary.bind(this);
   }
 
   handleRemoveFriend(email) {

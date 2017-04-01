@@ -19,6 +19,7 @@ class TripSummary extends React.Component {
     //   username: 'Brandon Wong',
     //   items: [[{amount: "42.00", members: ["Brandon Wong"], name: "Pasta"}]]
     // }
+
     return(
       <div className='page-container'>
         <h1>Most Recent Trips</h1>
