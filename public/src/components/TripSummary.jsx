@@ -1,5 +1,6 @@
+//RECENT TRIPS
+
 import React from 'react';
-import {Link} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import TripEntry from './TripEntry.jsx';
 import TripSummaryEntry from './TripSummaryEntry.jsx';
@@ -19,7 +20,6 @@ class TripSummary extends React.Component {
       </div>
     )
   }
-
 }
 
 export default TripSummary;
