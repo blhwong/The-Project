@@ -78,17 +78,8 @@ class App extends React.Component {
     this.handleSetSummary = this.handleSetSummary.bind(this);
   }
 
-  handleSetSummary() {
-    this.setState({
-      sumBill: '88.00',
-      sumTax: '',
-      sumTip: '5',
-      sumTotal: 95.92,
-      members: ['Brandon', 'Kai'],
-      tripName: 'Vegas 11/11/11',
-      username: 'Brandon Wong',
-      items: [[{"name":"2 Uni pasta","amount":"42.00","members":["Brandon Wong"]}],[{"name":"1 Truffle Fries","amount":"6.00","members":["Brandon Wong","Kai"]}],[{"name":"1 Chicken Wings","amount":"10.00","members":["Brandon Wong"]}],[{"name":"20 HH OYSTER","amount":"20.00","members":["Brandon Wong","Kai"]}],[{"name":"1 HH- Saporo","amount":"5.00","members":["Brandon Wong","Kai"]}],[{"name":"1 HH-Goose Island","amount":"5.00","members":["Brandon Wong"]}]]
-    });
+  handleSetSummary(summary) {
+    this.setState(summary);
   }
 
   handleRemoveFriend(email) {

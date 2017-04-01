@@ -374,16 +374,18 @@ const getReceiptsAndTrips = (params, cb) => {
               };
               // local[itemNames[item]]['package']['amount'] = itemPrices[item];
               local[itemNames[item]]['package']['amount'] = itemPrices[item];
-              if (!local[itemNames[item]]['member']) {
-                // local[itemNames[item]]['member'][itemMembers[item]] = true;
-                local[itemNames[item]]['members'] = {};
-                local[itemNames[item]]['members'][itemMembers[item]] =true;
+              console.log('MEMBER LIST ---------', local[itemNames[item]]['members']);
+            }
+            if (!local[itemNames[item]]['members']) {
+              // local[itemNames[item]]['member'][itemMembers[item]] = true;
+              local[itemNames[item]]['members'] = {};
+              local[itemNames[item]]['members'][itemMembers[item]] =true;
 
-                local[itemNames[item]]['package']['members'] = [itemMembers[item]];
-              } else if (!local[itemNames[item]]['member'][itemMembers[item]]) {
-                local[itemNames][item]['member'][itemMembers[item]] = true;
-                local['package']['members'].push(itemMembers[item]);
-              }
+              local[itemNames[item]]['package']['members'] = [itemMembers[item]];
+            } else if (!local[itemNames[item]]['member'][itemMembers[item]]) {
+              console.log('PUSHING MEMBER ================', itemMembers[item]);
+              local[itemNames][item]['member'][itemMembers[item]] = true;
+              local['package']['members'].push(itemMembers[item]);
             }
           }
           console.log('LOCAL STORAGE', local);
