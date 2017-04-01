@@ -314,17 +314,83 @@ const getReceiptsAndTrips = (params, cb) => {
   // let adminName = params.adminName;
   // let tripName = params.tripName;
   const queryStringGetReceiptInfoFromAdminName = 'select trips.name, receipts.sum_bill, receipts.sum_tax, receipts.sum_tip from trips, receipts where trips.adminID = (select members.id from members where members.email = ?) and trips.id = receipts.tripID';
-  const queryStringTest = 'select receipts.id, trips.id, trips.name, receipts.sum_bill, receipts.sum_tax, receipts.sum_tip, GROUP_CONCAT(distinct trips_members.memberID), items.receiptID, group_concat(items.name), group_concat(items.raw_price), group_concat(consumed_items.payeeID) from trips, receipts, trips_members, items, consumed_items where (select id from members where members.email=?) and (receipts.tripID = trips.id) and trips_members.tripID = trips.id and items.id=consumed_items.itemID and receipts.id=items.receiptID group by receipts.id, items.receiptID';
-  db.query(queryStringGetReceiptInfoFromAdminName, params, (err, result) => {
+  const queryStringGetTripsSummary = 'select receipts.id, trips.id, trips.name, receipts.sum_bill, receipts.sum_tax, receipts.sum_tip, GROUP_CONCAT(distinct members.name), items.receiptID, group_concat(items.name), group_concat(items.raw_price), group_concat(members.name) from trips, receipts, trips_members, items, consumed_items, members where (select id from members where members.email=?) and (receipts.tripID = trips.id) and trips_members.tripID = trips.id and items.id=consumed_items.itemID and receipts.id=items.receiptID and members.id=consumed_items.payeeID group by receipts.id, items.receiptID;'
+  // db.query(queryStringGetReceiptInfoFromAdminName, params, (err, result) => {
+  //   if (err) {
+  //     cb(err, null);
+  //   } else {
+  //     console.log(result);
+  //     db.query(queryStringTest, params, (err, result) => {
+  //       console.log('TEST', result);
+
+  //     });
+  //     cb(null, result);
+
+  //   }
+  // });
+  db.query(queryStringGetTripsSummary, params, (err, result) => {
     if (err) {
       cb(err, null);
     } else {
+      // "7,1,2"
+      // group_concat(items.name)
+      // :
+      // "1 Chicken Wings,2 Uni pasta,1 Truffle Fries,1 Chicken Wings,2 Uni pasta,2 Uni pasta,2 Uni pasta,1 Chicken Wings,1 HH- Saporo,1 Chicken Wings,2 Uni pasta,2 Uni pasta,20 HH OYSTER,1 Chicken Wings,1 HH- Saporo,1 Chicken Wings,2 Uni pasta,20 HH OYSTER,20 HH OYSTER,1 Chicken Wings,1 Chicken Wings,1 HH- Saporo,1 HH-Goose Island,20 HH OYSTER,1 Chicken Wings,20 HH OYSTER,1 Truffle Fries,1 HH- Saporo,1 HH-Goose Island,20 HH OYSTER,2 Uni pasta,20 HH OYSTER,1 HH- Saporo,1 Truffle Fries,1 HH-Goose Island,2 Uni pasta,20 HH OYSTER,20 HH OYSTER,2 Uni pasta,1 Truffle Fries,2 Uni pasta,1 HH-Goose Island,20 HH OYSTER,2 Uni pasta,2 Uni pasta,1 Chicken Wings,1 Truffle Fries,1 HH-Goose Island,2 Uni pasta,2 Uni pasta"
+      // group_concat(items.raw_price)
+      // :
+      // "10,42,6,10,42,42,42,10,5,10,42,42,20,10,5,10,42,20,20,10,10,5,5,20,10,20,6,5,5,20,42,20,5,6,5,42,20,20,42,6,42,5,20,42,42,10,6,5,42,42"
+      // group_concat(members.name)
+      // :
+      // "Brandon Wong,Tayo,Kai,Tayo,Brandon Wong,Kai,Tayo,Brandon Wong,Brandon Wong,Tayo,Brandon Wong,Kai,Tayo,Brandon Wong,Brandon Wong,Tayo,Brandon Wong,Kai,Tayo,Brandon Wong,Tayo,Brandon Wong,Kai,Kai,Brandon Wong,Tayo,Kai,Brandon Wong,Kai,Kai,Tayo,Tayo,Brandon Wong,Kai,Kai,Kai,Kai,Tayo,Tayo,Kai,Brandon Wong,Kai,Kai,Kai,Tayo,Tayo,Kai,Kai,Brandon Wong,Kai"
+      var summaryPacket = [];
       console.log(result);
-      db.query(queryStringTest, params, (err, result) => {
-        console.log('TEST', result);
-      });
-      cb(null, result);
+      console.log(result[0] ? result[0]['group_concat(items.name)'].split(',').length : null);
+      console.log(result[0] ? result[0]['group_concat(items.raw_price)'].split(',').length : null);
+      console.log(result[0] ? result[0]['group_concat(members.name)'].split(',').length : null);
+      if (result[0]) {
+        for (let summary = 0; summary < result.length; summary++) {
+          console.log('SUMMARY', summary);
+          var packet = {
+            'name': result[summary]['name'],
+            'sumBill': result[summary]['sum_bill'],
+            'sumTax': result[summary]['sum_tax'],
+            'sumTip': result[summary]['sum_tip'],
+            'members': result[summary]['GROUP_CONCAT(distinct members.name)'].split(',')
+          };
+          let items = [];
+          let local = {};
+          const itemNames = result[summary]['group_concat(items.name)'].split(',');
+          const itemPrices = result[summary]['group_concat(items.raw_price)'].split(',');
+          const itemMembers = result[summary]['group_concat(members.name)'].split(',');
+          for (let item = 0; item < itemNames.length; item++) {
+            if (!local[itemNames[item]]) {
+              local[itemNames[item]] = {'found': true};
+              local[itemNames[item]] = {
+                'package': {
+                  'name': itemMembers[item]
+                }
+              };
+              // local[itemNames[item]]['package']['amount'] = itemPrices[item];
+              local[itemNames[item]]['package']['amount'] = itemPrices[item];
+              if (!local[itemNames[item]]['member']) {
+                // local[itemNames[item]]['member'][itemMembers[item]] = true;
+                local[itemNames[item]]['members'] = {};
+                local[itemNames[item]]['members'][itemMembers[item]] =true;
 
+                local[itemNames[item]]['package']['members'] = [itemMembers[item]];
+              } else if (!local[itemNames[item]]['member'][itemMembers[item]]) {
+                local[itemNames][item]['member'][itemMembers[item]] = true;
+                local['package']['members'].push(itemMembers[item]);
+              }
+            }
+          }
+          console.log(local);
+          summaryPacket.push(packet);
+          // summaryPacket[summary]['name'] = result[summary]['name'];
+        }
+        cb(null, summaryPacket);
+
+      }
     }
   });
 
