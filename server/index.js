@@ -255,7 +255,7 @@ app.post('/upload/delete', function(req, res) {
 });
 
 app.post('/summary', (req, res) => {
-  console.log('req inside server /summary', req);
+  // console.log('req inside server /summary', req);
   db.createMemberSummary(req.body);
 });
 
@@ -268,6 +268,7 @@ app.post('/recent', (req, res) => {
       res.send(result);
     }
   });
+
 });
 
 //gVision.spliceReceipt produces an object of item : price pairs

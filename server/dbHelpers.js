@@ -405,21 +405,6 @@ const getReceiptsAndTrips = (params, cb) => {
   let adminName = params.adminName;
   let tripName = params.tripName;
 
-  // var results = {
-  //   // tripsArray: [],
-  //   // membersArray: [],
-  // }
-
-  // return db.queryAsync(queryStringGetAllTripsFromAdminName, adminName)
-  //   .then( tripsArray => tripsArray )
-  //   // .then()
-  //   // .then( tripsArray => {
-  //   //   return Promise.map( tripsArray, trip => {
-  //   //     return db.queryAsync(queryStringGetTripIDFromTripName, trip.name)
-  //   //       .then( tripID => tripID )
-  //   //   })
-  //   // })
-  //   .catch( err => console.log('ERROR: getAllTripsFromAdminName', err ));
 };
 
 module.exports = {
