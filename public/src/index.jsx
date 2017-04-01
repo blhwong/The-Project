@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
-import TripSummary from './components/TripSummary.jsx';
+import RecentTripSummary from './components/RecentTripSummary.jsx';
 import Friends from './components/Friends.jsx';
 import CreateTrip from './components/CreateTrip.jsx';
 import Itemization from './components/Itemization.jsx';
 import UploadReceipt from './components/Upload.jsx';
 import MemberSummary from './components/MemberSummary.jsx';
+import ReceiptSummary from './components/ReceiptSummary.jsx';
 import Breakdown from './components/Breakdown.jsx';
 import Profile from './components/Profile.jsx';
 import Login from './components/Login.jsx';
@@ -442,6 +443,13 @@ class App extends React.Component {
               data={this.state}
             />
             <PrivateRoute
+              path ="/receipt-summary"
+              isAuthenticated={this.state.isAuthenticated}
+              component={ReceiptSummary}
+              calculateMemberSum={this.calculateMemberSum}
+              data={this.state}
+            />
+            <PrivateRoute
               path ="/breakdown"
               isAuthenticated={this.state.isAuthenticated}
               component={Breakdown}
@@ -452,7 +460,7 @@ class App extends React.Component {
             <PrivateRoute
               path ="/recent-trips"
               isAuthenticated={this.state.isAuthenticated}
-              component={TripSummary}
+              component={RecentTripSummary}
               data={this.state}
               recent={this.getRecentTrip}
               setSummary={this.handleSetSummary}

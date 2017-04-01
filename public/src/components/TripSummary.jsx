@@ -1,5 +1,3 @@
-//RECENT TRIPS
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TripEntry from './TripEntry.jsx';
