@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import TripEntry from './TripEntry.jsx';
 import TripSummaryEntry from './TripSummaryEntry.jsx';
@@ -12,11 +13,13 @@ class TripSummary extends React.Component {
     return(
       <div className='page-container'>
         <h1>Most Recent Trips</h1>
-        <div className='trip-summary'>{this.props.data.recent.map((item,index) => <TripSummaryEntry key={index} setSummary={this.props.setSummary} item={item}/>)}
+        <div className='trip-summary'>{this.props.data.recent.map((item,index) =>
+          <TripSummaryEntry key={index} setSummary={this.props.setSummary} item={item}/>)}
         </div>
       </div>
     )
   }
+
 }
 
 export default TripSummary;

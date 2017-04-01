@@ -193,12 +193,22 @@ app.get('*', checkAuthentication, authHelper, (req, res) => {
   }
 });
 
-app.get('/testing', function(req, res) {
-  res.send('hello world');
-  console.log('req.cookies is ========', req.cookies);
-  console.log('req.session is ========', req.session);
-  console.log('req.session.user is ========', req.session.user);
-});
+
+
+app.get('/summaryReceipt', function(req, res) {
+  // console.log('REQ IN SERVER: ', req);
+  db.getReceiptsAndTrips(params, function (err, data) {
+    if (err) {
+      console.log('error: ', err);
+      res.send(500);
+    } else {
+      //got data back
+    }
+
+  })
+  // send back
+
+})
 
 //To be used for testing and seeing requests
 app.post('/createTripName', function(req, res) {
@@ -250,6 +260,7 @@ app.post('/upload/delete', function(req, res) {
 });
 
 app.post('/summary', (req, res) => {
+  console.log('req inside server /summary', req);
   db.createMemberSummary(req.body);
 });
 

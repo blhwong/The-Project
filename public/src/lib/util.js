@@ -31,6 +31,15 @@ module.exports = {
     function(res) {
       console.log('success inserting into db', res);
     })
+  },
+
+  // send GET request to query db for trip info
+  retrieveTripInfo: (req) => {
+    console.log('REQUEST BODY: ', req.tripName);
+    console.log('REQUEST BODY: ', req.adminName);
+    $.get('/summaryReceipt', function (res) {
+
+    })
   }
 
 }
