@@ -10,7 +10,7 @@ class MemberSummary extends React.Component {
     this.sumBill = Number(this.props.data.sumBill);
     this.sumTax = Number(this.props.data.sumTax);
     this.sumTip = Number(this.props.data.sumTip);
-    this.sumTotal = Number(this.props.data.sumTotal);
+    // this.sumTotal = Number(this.props.data.sumTotal);
     this.memberCount = this.props.data.members.length;
     this.perPerson = ((this.sumTax + this.sumTip) / this.memberCount);
     this.handleSubmit = this.handleSubmit.bind(this);
