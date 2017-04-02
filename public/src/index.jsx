@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
-import RecentTripSummary from './components/RecentTripSummary.jsx';
+import TripSummary from './components/TripSummary.jsx';
 import Friends from './components/Friends.jsx';
 import CreateTrip from './components/CreateTrip.jsx';
 import Itemization from './components/Itemization.jsx';
@@ -82,6 +82,7 @@ class App extends React.Component {
   }
 
   handleSetSummary(summary) {
+    console.log('SETTING STATE');
     this.setState(summary);
   }
 
@@ -460,7 +461,7 @@ class App extends React.Component {
             <PrivateRoute
               path ="/recent-trips"
               isAuthenticated={this.state.isAuthenticated}
-              component={RecentTripSummary}
+              component={TripSummary}
               data={this.state}
               recent={this.getRecentTrip}
               setSummary={this.handleSetSummary}

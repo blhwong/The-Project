@@ -14,6 +14,18 @@ class ReceiptSummary extends React.Component {
     this.perPerson = ((this.sumTax + this.sumTip) / this.memberCount);
   }
 
+  handleOnClick() {
+    var summary = {
+      sumBill: this.props.item.sumBill,
+      sumTax: this.props.item.sumTax,
+      sumTip: this.props.item.sumTip,
+      members: this.props.item.members,
+      tripName: this.props.item.name,
+      items: this.props.item.items
+    }
+    this.props.setSummary(summary);
+  }
+
   render() {
     return (
       <div className='member-summary-page'>
