@@ -18,7 +18,6 @@ import Util from './lib/util.js';
 import CreateItem from './components/CreateItem.jsx';
 import $ from 'jquery';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -82,7 +81,6 @@ class App extends React.Component {
   }
 
   handleSetSummary(summary) {
-    console.log('SETTING STATE');
     this.setState(summary);
   }
 
