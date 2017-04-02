@@ -9,6 +9,8 @@
   },
   "scripts": {
     "start": "nodemon server/index.js & webpack -d --watch",
+    "dev-wp": "webpack -d --watch",
+    "dev-sv": "nodemon server/index.js",
     "webpack": "webpack -d --watch"
   },
   "dependencies": {

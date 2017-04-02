@@ -1,10 +1,10 @@
-//MEMBER SUMMARY (after going through creating trip process)
+//RECEIPT SUMMARY (when clicking on recent trips)
 
 import React from 'react';
 import Util from '../lib/util.js';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
-class MemberSummary extends React.Component {
+class ReceiptSummary extends React.Component {
   constructor(props) {
     super(props);
     this.sumBill = Number(this.props.data.sumBill);
@@ -12,20 +12,24 @@ class MemberSummary extends React.Component {
     this.sumTip = Number(this.props.data.sumTip);
     this.memberCount = this.props.data.members.length;
     this.perPerson = ((this.sumTax + this.sumTip) / this.memberCount);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event) {
-    // event.preventDefault();
-    Util.insertIntoDb(this.props.data);
-    // Util.sendServerTripName(this.props.data.tripName, this.props.data.tripDesc );
-    this.props.calculateMemberSum();
+  handleOnClick() {
+    var summary = {
+      sumBill: this.props.item.sumBill,
+      sumTax: this.props.item.sumTax,
+      sumTip: this.props.item.sumTip,
+      members: this.props.item.members,
+      tripName: this.props.item.name,
+      items: this.props.item.items
+    }
+    this.props.setSummary(summary);
   }
 
   render() {
     return (
       <div className='member-summary-page'>
-        <Link to='/additems' className='back-history'>Receipt Items</Link>
+        <Link to='/recent-trips' className='back-history'>Back</Link>
         <div className='container'>
           <div className='receipt-info'>
             <h2>Receipt Summary</h2>
@@ -80,18 +84,9 @@ class MemberSummary extends React.Component {
             </div>
 
           </div>
-          <div className='sumbit-btn-bar-outer-container'>
-            <div className='sumbit-btn-bar-inner-container'>
-              <Link
-                to='/breakdown'
-                onClick={this.handleSubmit}
-                className='btn btn-primary btn-wide btn-link'
-              >Submit</Link>
-            </div>
-          </div>
-      </div>
+        </div>
       </div>
     )
   }
 }
-export default MemberSummary;
+export default ReceiptSummary;

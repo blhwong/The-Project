@@ -5,6 +5,7 @@ class TripSummaryEntry extends React.Component {
   constructor(props) {
     super(props);
   }
+
   handleOnClick() {
     var summary = {
       sumBill: this.props.item.sumBill,
@@ -16,10 +17,11 @@ class TripSummaryEntry extends React.Component {
     }
     this.props.setSummary(summary);
   }
+
   render() {
     return (
       <p>
-        <Link to="/summary" onClick={this.handleOnClick.bind(this)} className='trip-summary'>{this.props.item.name}</Link>
+        <Link to="/receipt-summary" onClick={this.handleOnClick.bind(this)} className='trip-summary'>{this.props.item.name}</Link>
       </p>
     );
   }

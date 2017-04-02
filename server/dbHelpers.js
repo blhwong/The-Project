@@ -299,8 +299,6 @@ const getReceiptsAndTrips = (params, cb) => {
     database = 'heroku_a258462d4ded143' + '.';
   }
 
-  // const queryStringGetAllTripsFromAdminName = `SELECT trips.name FROM ` + database + `trips WHERE trips.adminID = (SELECT members.id FROM ` + database + `members WHERE members.name = ?);`
-  // const queryStringGetTripIDFromTripName = `SELECT trips.id from ` + database + `trips WHERE trips.name = ?;`
   // const queryStringGetMemberIDFromTripID = `SELECT trips_members.memberID from heroku_a258462d4ded143.trips_members WHERE trips_members.tripID = ?;`
   // const queryStringGetMemberNameFromMemberID = `SELECT members.name FROM heroku_a258462d4ded143.members WHERE members.id = ?;`
 
@@ -403,17 +401,10 @@ const getReceiptsAndTrips = (params, cb) => {
     }
   });
 
+  console.log(params);
+  let adminName = params.adminName;
+  let tripName = params.tripName;
 
-
-  // return db.queryAsync(queryStringGetAllTripsFromAdminName, adminName)
-  //   .then( tripsArray => tripsArray )
-  //   // .then( tripsArray => {
-  //   //   return Promise.map( tripsArray, trip => {
-  //   //     return db.queryAsync(queryStringGetTripIDFromTripName, trip.name)
-  //   //       .then( tripID => tripID )
-  //   //   })
-  //   // })
-  //   .catch( err => console.log('ERROR: getAllTripsFromAdminName', err ));
 };
 
 module.exports = {

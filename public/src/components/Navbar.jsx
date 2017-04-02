@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
+
+
 const Navbar = ({isAuthenticated, handleClickLogout, sideMenuState, menuOnClick, recent}) => (
   <header>
     <div className='navbar-component'>
@@ -8,7 +10,7 @@ const Navbar = ({isAuthenticated, handleClickLogout, sideMenuState, menuOnClick,
       <Link to="/" className='brand'>Diff</Link>
       <nav className='menu'>
         <Link to="/" className='link'>Home</Link>
-        <Link to="/recent-trips" onClick={recent}className='link'>Recent Trips</Link>
+        <Link to="/recent-trips" onClick={recent} className='link'>Recent Trips</Link>
         <Link to="/friends" className='link'>Friends</Link>
         {isAuthenticated ? null : <Link to="/login" className='link'>Login</Link>}
         {!isAuthenticated ? null : <Link to="/logout" onClick={handleClickLogout} className='link'>Logout</Link>}

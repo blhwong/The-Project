@@ -71,32 +71,32 @@ class Breakdown extends React.Component {
                     <span>
                     <a className='button' style={{marginLeft: 25}} href='#openModal'>Email</a>
                     <div id='openModal' className='modalDialog'>
-                      <div id='modalWindow'> 
+                      <div id='modalWindow'>
                           <div style={{textAlign: 'right'}}>
                             <a href='#close' title='Close' className='close'><b>X</b></a>
-                          </div> 
-                          <p>Complete the form below to send an email to {member}:</p> 
-                          <form id='modalFeedback' onSubmit={(e) => { this.props.sendMessage(e, this.state, () => { this.setState({recipientEmail: '', subject: '', message: ''}); window.location.assign('#close'); }); } }> 
+                          </div>
+                          <p>Send a reminder:</p>
+                          <form id='modalFeedback' onSubmit={(e) => { this.props.sendMessage(e, this.state, () => { this.setState({recipientEmail: '', subject: '', message: ''}); window.location.assign('#close'); }); } }>
                            <p><label>Your Name<strong>*</strong><br></br>
                             <input type='text' autoFocus required size='48' name='name' defaultValue={this.state.senderName}></input>
                           </label></p>
                           <p><label>Your Email Address<strong>*</strong><br></br>
                             <input type="email" required title="Please enter a valid email address" size="48" name='email' value={this.state.senderEmail} onChange={this.senderEmailChange.bind(this)}></input>
-                          </label></p> 
-                          <p><label>{member}'s Email Address<strong>*</strong><br></br>
+                          </label></p>
+                          <p><label>Recipent's Email Address<strong>*</strong><br></br>
                           <input type="email" required title="Please enter a valid email address" size="48" name='email' value={this.state.recipientEmail} onChange={this.recipientEmailChange.bind(this)}></input>
-                          </label></p> 
+                          </label></p>
                           <p><label>Subject<br></br>
                             <input type='text' size='48' name='subject' value={this.state.subject} onChange={this.subjectChange.bind(this)}></input>
-                          </label></p> 
+                          </label></p>
                           <p><label>Message<strong>*</strong><br></br>
                             <textarea required name='message' cols='48' rows='8' value={this.state.message} onChange={this.messageChange.bind(this)}></textarea>
-                          </label></p> 
+                          </label></p>
                           <p><input type='submit' name='feedbackForm' defaultValue='Send Message'></input>
-                          </p> 
+                          </p>
                           </form>
-                        </div> 
-                    </div> 
+                        </div>
+                    </div>
                     </span>
                     ) : (<span> <div style={{marginLeft: 62.5}}></div></span>)}
                 </div>

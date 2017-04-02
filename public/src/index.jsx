@@ -7,6 +7,7 @@ import CreateTrip from './components/CreateTrip.jsx';
 import Itemization from './components/Itemization.jsx';
 import UploadReceipt from './components/Upload.jsx';
 import MemberSummary from './components/MemberSummary.jsx';
+import ReceiptSummary from './components/ReceiptSummary.jsx';
 import Breakdown from './components/Breakdown.jsx';
 import Profile from './components/Profile.jsx';
 import Login from './components/Login.jsx';
@@ -16,7 +17,6 @@ import PrivateRouteHome from './components/PrivateRouteHome.jsx';
 import Util from './lib/util.js';
 import CreateItem from './components/CreateItem.jsx';
 import $ from 'jquery';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -77,6 +77,7 @@ class App extends React.Component {
     this.handleRemoveFriend = this.handleRemoveFriend.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.handleSetSummary = this.handleSetSummary.bind(this);
+    this.updateTripSummary = this.updateTripSummary.bind(this);
   }
 
   handleSetSummary(summary) {
@@ -221,6 +222,8 @@ class App extends React.Component {
     this.getRecentTrip();
   }
 
+  //TECH DEBT for POST request
+  //queries DB for trips. sets the state for all the trips
   getRecentTrip() {
     let user = this.state;
     $.ajax({
@@ -230,6 +233,7 @@ class App extends React.Component {
       success: (results) => {
         console.log('app component trips of this person', results);
         this.setState({
+          // NEED MORE PROPERTIES ON RESULTS TO SET STATE
           recent: results
         });
       },
@@ -238,6 +242,7 @@ class App extends React.Component {
       }
     });
   }
+
 
   calculateTotal() {
     let sum = 0;
@@ -356,6 +361,12 @@ class App extends React.Component {
       url: '/submit/email',
       data: data,
       success: cb
+    })
+  }
+
+  updateTripSummary(tripData) {
+    this.setState({
+      sumBill: tripData.sumBill
     });
   }
 
@@ -372,6 +383,8 @@ class App extends React.Component {
               menuOnClick={this.menuOnClick}
               sideMenuState={this.state.sideMenuState}
               recent={this.getRecentTrip}
+              updateState={this.updateTripState}
+
             />
           <div className='content-container'>
             <PrivateRouteHome path="/" isAuthenticated={this.state.isAuthenticated}
@@ -429,6 +442,13 @@ class App extends React.Component {
               data={this.state}
             />
             <PrivateRoute
+              path ="/receipt-summary"
+              isAuthenticated={this.state.isAuthenticated}
+              component={ReceiptSummary}
+              calculateMemberSum={this.calculateMemberSum}
+              data={this.state}
+            />
+            <PrivateRoute
               path ="/breakdown"
               isAuthenticated={this.state.isAuthenticated}
               component={Breakdown}
@@ -443,6 +463,7 @@ class App extends React.Component {
               data={this.state}
               recent={this.getRecentTrip}
               setSummary={this.handleSetSummary}
+              tripName={this.state.tripName}
             />
             <PrivateRoute
               path ="/friends"
