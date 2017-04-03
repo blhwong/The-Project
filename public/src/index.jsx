@@ -6,7 +6,7 @@ import Friends from './components/Friends.jsx';
 import CreateTrip from './components/CreateTrip.jsx';
 import Itemization from './components/Itemization.jsx';
 import UploadReceipt from './components/Upload.jsx';
-import MemberSummary from './components/MemberSummary.jsx';
+import MemberSummary from './components/memberSummary.jsx';
 import ReceiptSummary from './components/ReceiptSummary.jsx';
 import Breakdown from './components/Breakdown.jsx';
 import Profile from './components/Profile.jsx';
