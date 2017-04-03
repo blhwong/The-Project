@@ -167,7 +167,7 @@ app.get('/logout', authHelper, function(req, res) {
 });
 
 app.get('/verify', authHelper, function(req, res) {
-  // console.log('LOCAL STORAGE', localStorage);
+  console.log('LOCAL STORAGE', localStorage);
   db.getAllFriends([localStorage.user.email], (err, result) => {
     if (err) {
       res.status(500).send(err);
