@@ -1,6 +1,12 @@
 const mysql = require('mysql');
 const mysqlConfig = require('./db-mysql/config.js');
-const db = mysql.createPool(mysqlConfig);
+let deb;
+if (process.env.NODE_ENV === 'production') {
+  db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
+} else {
+  db = mysql.createConnection(mysqlConfig);
+}
+// const db = mysql.createPool('mysqlConfig');
 const Promise = require('bluebird');
 
 Promise.promisifyAll(db);
@@ -292,12 +298,12 @@ const createMemberSummary = (params) => {
 
 
 const getReceiptsAndTrips = (params, cb) => {
-  let database = mysqlConfig.database;
-  if (database = 'gewd') {
-    database = '';
-  } else if (database = 'heroku_a258462d4ded143') {
-    database = 'heroku_a258462d4ded143' + '.';
-  }
+  // let database = mysqlConfig.database;
+  // if (database = 'gewd') {
+  //   database = '';
+  // } else if (database = 'heroku_a258462d4ded143') {
+  //   database = 'heroku_a258462d4ded143' + '.';
+  // }
 
   // const queryStringGetMemberIDFromTripID = `SELECT trips_members.memberID from heroku_a258462d4ded143.trips_members WHERE trips_members.tripID = ?;`
   // const queryStringGetMemberNameFromMemberID = `SELECT members.name FROM heroku_a258462d4ded143.members WHERE members.id = ?;`

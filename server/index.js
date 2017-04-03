@@ -70,7 +70,7 @@ if (process.env.NODE_ENV === 'production') {
   passport.use(new FacebookStrategy({
     clientID: process.env.FB_CLIENT_ID,
     clientSecret: process.env.FB_CLIENT_SECRET,
-    callbackURL: '/auth/facebook/callback',
+    callbackURL: process.env.FB_CALLBACK_URL,
     profileFields: ['id', 'email', 'displayName', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified'],
   },
 

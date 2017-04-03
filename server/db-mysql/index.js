@@ -4,4 +4,8 @@ const mysqlConfig = require('./config.js');
 // const Promise = require('bluebird');
 const database = 'gewd';
 
-const connection = mysql.createConnection(mysqlConfig);
+if (process.env.NODE_ENV === 'production') {
+  const connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
+} else {
+  const connection = mysql.createConnection(mysqlConfig);
+}
