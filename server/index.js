@@ -170,6 +170,7 @@ app.get('/verify', authHelper, function(req, res) {
   console.log('LOCAL STORAGE', localStorage);
   db.getAllFriends([localStorage.user.email], (err, result) => {
     if (err) {
+      console.log(err);
       res.status(500).send(err);
     } else {
       let userInfo = {
