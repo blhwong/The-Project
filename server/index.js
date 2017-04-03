@@ -9,9 +9,10 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const KEYS = process.env.fbKey;
 const fileUpload = require('express-fileupload');
 // const config = require('./config/config');
+let config;
 if (process.env.NODE_ENV !== 'production') {
-  const config = require('./config/config');
-  }
+  config = require('./config/config');
+}
 
 const app = express();
 const cloudinary = require('cloudinary');
