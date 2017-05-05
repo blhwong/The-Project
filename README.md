@@ -1,13 +1,37 @@
 # The Project
 
-> Shared payment for travel
+An application for bill splitting and tracking with
+
+![](./docs/doc12.png)
+
+Diff is an application for dividing your bills and receipts with your friends. It utilizes PassportJS for authentication, and you can take a picture of your receipt where Google Vision API will parse the breakdown of your receipt. Using an algorithm, you can add your friends to items and it will take you to a breakdown summary of what is owed. You can e-mail your friends with the MailGun API to remind them of how much they owe. You can add them to your friends list for easy bill collaboration. You can also view your recently added trips at a later time.
+
+Create your trip
+:----------------------------------------------------------------------------------------------------:
+![](./docs/doc13.png)
+
+Upload your receipt
+:----------------------------------------------------------------------------------------------------:
+![](./docs/doc8.png)
+
+Add friends to bill
+:----------------------------------------------------------------------------------------------------:
+![](./docs/doc9.png)
+
+View receipt summary
+:----------------------------------------------------------------------------------------------------:
+![](./docs/doc10.png)
+
+Submit final breakdown
+:----------------------------------------------------------------------------------------------------:
+![](./docs/doc11.png)
 
 ## Team
 
-  - Whitney Zhu
-  - Gary Wong
-  - Duy Aiden Nguyen
-  - Eugene Song 
+  - Brandon Wong
+  - Kai Yu
+  - Tayo Jolaosho
+
 
 ## Table of Contents
 
