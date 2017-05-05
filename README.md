@@ -1,6 +1,6 @@
 # The Project
 
-An application for bill splitting and tracking with
+An application for bill splitting and tracking with friends
 
 ![](./docs/File12.png)
 
