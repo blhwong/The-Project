@@ -48,6 +48,9 @@ Submit final breakdown
 > Run npm start and npm webpack;
 > mysql -u root < schema.sql; schema is available in server/db-mysql
 
+## Technologies
+MySQL, Express, React, React-router, Node, MailGun, PassportJS, Google Vision API
+
 ## Requirements
 
 - Node 6.4.x
